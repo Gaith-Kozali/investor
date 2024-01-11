@@ -1,0 +1,99 @@
+﻿@using Investor.Models.Investor
+@using System.Collections
+@using System.Net
+
+@model DetailsModel
+
+@{
+    String title = "Add coupon to multiple books";
+    List<string> time = new List<string> { "For24", "ForMonth", "For3Month" };
+    int inde = 0;
+}
+
+<style>
+  
+
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 20px;
+    }
+
+    .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+
+        .image-container img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .narrow-input {
+        width: 500px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+</style>
+
+<div class="content-container">
+    <div class="image-container">
+        <h2 style="text-align: left; padding-left: 10px;">Welcome Gaith</h2>
+    </div>
+
+    <form method="post">
+        <h3 class="text-primary">@title</h3>
+
+        <div class="form-group">
+            <label asp-for="code" class="form-label mt-4">Coupon code</label>
+            <br />
+            <span asp-validation-for="code" class="text-danger"></span>
+            <input asp-for="code" class="form-control narrow-input" aria-describedby="emailHelp" placeholder="Coupon code" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="discount" class="form-label mt-4">Discount</label>
+            <br />
+            <span asp-validation-for="discount" class="text-danger"></span>
+            <input asp-for="discount" class="form-control narrow-input" placeholder="Discount" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+            <label for="exampleSelect2" class="form-label mt-4">Choose books supporting the coupon</label>
+            <select class="form-select" id="exampleSelect2" asp-for="bookId">
+                @foreach (Book book in ViewBag.bookList)
+                {
+                    <option value="@book.Id">@book.name</option>
+                }
+            </select>
+        </div>
+
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            @foreach (var val in time)
+            {
+                <input asp-for="timePeriodc" type="radio" class="btn-check" id="btnradio@(inde+1)" autocomplete="off" value="@val" />
+                <label class="btn btn-outline-primary" for="btnradio@(inde+1)">@val</label>
+                inde++;
+            }
+        </div>
+        <br />
+        <span asp-validation-for="timePeriodc" class="text-danger"></span>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">OK</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,105 @@
+﻿@using Investor.Models.Investor
+@model List<Book>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Details</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .book-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 50%; /* Added circular border */
+            border: 2px solid #ddd; /* Added border */
+        }
+
+        .book-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .book-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .book-description {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .coupon-id,
+        .book-price {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .buttons-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .delete-button,
+        .edit-button {
+            padding: 5px 10px;
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px; /* Added border radius */
+        }
+
+        .edit-button {
+            background-color: #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        @foreach (Book item in Model)
+        {
+            <div class="container">
+                <img class="book-image" src="~/images/company.jpg" alt="Book Image">
+                <div class="book-info">
+                    <h2 class="book-name">Book Name: @item.name</h2>
+                    <p class="book-description">Book Description: @item.description</p>
+                    <p class="coupon-id">Coupon code: @(item.CouponId != null ? item.Coupon.code : "No coupon available")</p>
+                    <p class="book-price">Price: @item.price</p>
+                </div>
+                <div class="buttons-container">
+                    <form method="post" asp-action="DeleteBook" asp-controller="Investor">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="bookId" value="@item.Id" />
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                    <a class="edit-button" asp-controller="Investor" asp-action="EditItem" asp-route-id="@item.Id">Edit</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

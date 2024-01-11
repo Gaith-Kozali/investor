@@ -1,0 +1,84 @@
+﻿<style>
+    .coupon-container {
+        padding: 10px 20px; /* Add padding from right and left */
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .coupon-details {
+        padding-left: 20px;
+    }
+
+    .coupon-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .coupon-info {
+        margin-bottom: 10px;
+    }
+
+    .coupon-books {
+        margin-top: 10px;
+    }
+
+    .book-info {
+        margin-bottom: 5px;
+    }
+
+    .edit-link,
+    .delete-link {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+        .edit-link:hover,
+        .delete-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<h4>Coupon</h4>
+
+@foreach (var coupon in Model)
+{
+    <div class="coupon-container">
+        <div class="coupon-details">
+            <div class="coupon-title">Coupon Information</div>
+            <div class="coupon-info">
+                <span class="font-weight-bold">Code:</span> @coupon.code
+            </div>
+            <div class="coupon-info">
+                <span class="font-weight-bold">Discount:</span> @coupon.discount
+            </div>
+            <div class="coupon-info">
+                <span class="font-weight-bold">Time Period:</span> @coupon.timePeriodc
+            </div>
+            <div class="coupon-books">
+                <div class="coupon-title">Books</div>
+                @foreach (var book in coupon.book)
+                {
+                    <div class="book-info">
+                        <span class="font-weight-bold">ID:</span> @book.Id
+                    </div>
+                    <div class="book-info">
+                        <span class="font-weight-bold">Name:</span> @book.name
+                    </div>
+                    <div class="book-info">
+                        <span class="font-weight-bold">Price:</span> @book.price
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+        <div>
+            <a asp-controller="Investor" asp-action="EditCoupon" asp-route-id="@coupon.id" class="edit-link">Edit</a> |
+            <a asp-controller="Investor" asp-action="DeleteCoupon" asp-route-id="@coupon.id" class="delete-link">Delete</a>
+        </div>
+    </div>
+    <hr />
+}

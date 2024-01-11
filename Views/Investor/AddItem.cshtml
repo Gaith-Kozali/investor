@@ -1,0 +1,135 @@
+﻿@using Investor.Models.Investor
+@model Book
+@{
+    List<String> bookType = ["Historical", "novel", "scientific", "Human Development", "geology","detective story"];
+    
+    
+    
+    
+
+}
+
+<style>
+    .container {
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        max-width: 500px;
+        margin: 30px auto; /* Add this line to center the container horizontally */
+    }
+
+    .upload-icon {
+        font-size: 30px;
+        color: #999;
+        margin-bottom: 10px;
+    }
+
+    .upload-input {
+        display: none;
+    }
+
+    .upload-label {
+        cursor: pointer;
+        background-color: lightskyblue;
+        color: #fff;
+        padding: 10px 10px;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        width: 100%;
+        max-width: 600px; /* Adjust the max-width to your preference */
+        margin: 0 auto; /* Add this line to center the form horizontally */
+    }
+
+    .center-button {
+        display: flex;
+        justify-content: center; /* Add this line to center the button horizontally */
+        align-items: center; /* Add this line to center the button vertically */
+       margin:20px;
+    }
+
+    button {
+        width: 600px;
+        margin: 0;
+    }
+</style>
+<form method="post">
+
+
+   
+        <div class="container">
+        <span asp-validation-for="image" class="text-danger"></span>
+        <br>
+            <i class="upload-icon fas fa-plus"></i>
+            <input asp-for="image" type="file" class="upload-input"  />
+            <label asp-for="image" class="upload-label">Choose image <i class="bi bi-file-image"></i></label>
+        </div>
+   
+        <div class="form-group">
+        
+           <label asp-for="name" class="form-label mt-4">Name</label>
+        <br>
+        <span asp-validation-for="name" class="text-danger"></span>
+            <input asp-for="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Book name">
+        </div>
+
+        <div class="form-group">
+        
+       
+        <label asp-for="price" class="form-label mt-4">Price</label>
+        <br>
+        <span asp-validation-for="price" class="text-danger"></span>
+            <input asp-for="price" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Price">
+        </div>
+
+        <div class="form-group">
+       
+      
+        <label asp-for="author" class="form-label mt-4">Author</label>
+        <br>
+        <span asp-validation-for="author" class="text-danger"></span>
+            <input asp-for="author" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Author name">
+        </div>
+
+        <div class="form-group">
+        
+        
+            <label asp-for="description" class="form-label mt-4">Book description</label>
+        <br>
+        <span asp-validation-for="description" class="text-danger"></span>
+            <textarea asp-for="description" class="form-control"  rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+        
+        
+        <label asp-for="type" class="form-label mt-4">Book type</label>
+        <br>
+        <span asp-validation-for="type" class="text-danger"></span>
+      
+            <select asp-for="type" class="form-select">
+                 
+            @{
+                foreach (var tay in bookType)
+                {
+                    <option>@tay</option>
+
+                }
+            }
+            </select>
+        </div>
+
+        <input type="hidden" asp-for="InvestoreAccountId" value="1"></input>
+    <input type="hidden" asp-for="CouponId" value="" />
+    <input type="hidden" asp-for="Coupon" value="" />
+    
+         
+    
+        <div class="center-button">
+            <button class="btn btn-lg btn-primary" type="submit">Block button</button>
+        </div>
+   
+
+</form>

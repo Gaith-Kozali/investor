@@ -1,0 +1,108 @@
+﻿@using Investor.Models.Investor
+@model Coupon
+
+
+<style>
+    /* Center the form and heading */
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    /* Style the form */
+    .coupon-form {
+        width: 500px; /* Increase the width */
+        height: 400px; /* Increase the height */
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style the form */
+  
+
+    /* Style the form labels */
+    .control-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Style the input fields */
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /* Style the validation error messages */
+    .text-danger {
+        color: red;
+    }
+
+    /* Style the submit button */
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    /* Style the back link */
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container">
+    <h4>Coupon</h4>
+    <br/>
+    <br />
+    <div class="coupon-form">
+        <form method="post" asp-action="EditCoupon">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="code" class="control-label"></label>
+                <input asp-for="code" class="form-control" />
+                <span asp-validation-for="code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="discount" class="control-label"></label>
+                <input asp-for="discount" class="form-control" />
+                <span asp-validation-for="discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="timePeriodc" class="control-label"></label>
+                <input asp-for="timePeriodc" class="form-control" />
+                <span asp-validation-for="timePeriodc" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="book" value= "" class="form-control" />
+            
+           
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <a asp-action="ViewCoupon" class="back-link">Back to List</a>
+</div>
+
+
